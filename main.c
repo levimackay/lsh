@@ -34,13 +34,20 @@ int main(void){
 			// Need to add something here so the shell checks for cd
 			// Need to make sure that I type something and that the first thing says cd
 			if (count > 0 && strcmp(args[0], "cd") == 0){
-				if (args[1] == NULL){
-					printf("lsh: cd needs a folder\n");
+				char *dir;
+				if (args[1] == NULL || strcmp(args[1], "~") == 0){
+					dir = getenv("HOME");
 				} else {
-					if (chdir(args[1]) != 0){
+					dir = args[1];
+				}
+
+				if (dir == NULL){
+					printf("No Home directory found\n");
+				} else {
+					if (chdir(dir) != 0){
 						perror("lsh");
 					}
-					
+
 				}
 				continue;
 
