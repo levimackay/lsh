@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(void){
 
@@ -9,7 +10,14 @@ int main(void){
 		if (fgets(line, sizeof line, stdin) == NULL){
 			break;
 		} else {
-			printf("You said %s", line);
+			char *word = strtok(line, " \t\n");
+			if (word != NULL && strcmp(word, "exit") == 0){
+				break;
+			}
+			while(word != NULL){
+				printf("word: %s\n", word);
+				word = strtok(NULL, " \t\n");
+			}
 		}
 	}
 }
