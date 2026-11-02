@@ -14,10 +14,15 @@ int main(void){
 			if (word != NULL && strcmp(word, "exit") == 0){
 				break;
 			}
-			while(word != NULL){
-				printf("word: %s\n", word);
+			char *args[64];
+			int count = 0;
+
+			while(word != NULL && count < 63){
+				args[count] = word;
+				count++;
 				word = strtok(NULL, " \t\n");
 			}
+			args[count] = NULL;
 		}
 	}
 }
