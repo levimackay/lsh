@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <string.h>
 
 int main(void){
@@ -23,6 +26,17 @@ int main(void){
 				word = strtok(NULL, " \t\n");
 			}
 			args[count] = NULL;
+
+			if (count > 0){
+				pid_t pid = fork();
+				if (pid == 0){
+					execvp(args[0], args);
+					perror("lsh");
+					exit(1);
+				} else {
+					waitpid(pid, NULL, 0);
+				}
+			}
 		}
 	}
 }
