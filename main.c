@@ -32,6 +32,19 @@ int main(void){
 			args[count] = NULL;
 
 			// Need to add something here so the shell checks for cd
+			// Need to make sure that I type something and that the first thing says cd
+			if (count > 0 && strcmp(args[0], "cd") == 0){
+				if (args[1] == NULL){
+					printf("lsh: cd needs a folder\n");
+				} else {
+					if (chdir(args[1]) != 0){
+						perror("lsh");
+					}
+					
+				}
+				continue;
+
+			}
 
 			if (count > 0){
 				pid_t pid = fork();
