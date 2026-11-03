@@ -1,4 +1,3 @@
-// Headers
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -6,21 +5,17 @@
 #include <string.h>
 
 int main(void){
-	// C doesn't have True, so you have to use 1 instead
+	char *line = NULL;
+	size_t cap = 0;
 	while (1){
-		// Prints the initial text of the shell. Checks to make sure that input is actually something
 		printf("lsh> ");
-		char line[1024];
-		if (fgets(line, sizeof line, stdin) == NULL){
+		if (getline(&line, &cap, stdin) == -1){
 			break;
 		} else {
-			// Makes all the characters into a string
 			char *word = strtok(line, " \t\n");
-			// I coded this in Nvim and sometimes the program wouldn't close when I did Cntr^c/d 
 			if (word != NULL && strcmp(word, "exit") == 0){
 				break;
 			}
-			// Now that we have words, we need to 
 			char *args[64];
 			int count = 0;
 
@@ -31,8 +26,6 @@ int main(void){
 			}
 			args[count] = NULL;
 
-			// Need to add something here so the shell checks for cd
-			// Need to make sure that I type something and that the first thing says cd
 			if (count > 0 && strcmp(args[0], "cd") == 0){
 				char *dir;
 				if (args[1] == NULL || strcmp(args[1], "~") == 0){
@@ -53,6 +46,16 @@ int main(void){
 
 			}
 
+			if (count > 0 && strcmp(args[0], "help") == 0){
+				printf("\n~~~~~~~~~~~\n");
+				printf("cd: with nothing after it, or ~, it goes home. With a folder, it goes there, and .. goes up one\n");
+				printf("help: it shows this list.\n");
+				printf("exit: it quits lsh. Ctrl-D does the same.\n");
+				printf("\nEverything else is a program on your PATH, and man plus the name shows how to use it.");
+				printf("\n~~~~~~~~~~~\n");
+				continue;
+			}
+
 			if (count > 0){
 				pid_t pid = fork();
 				if (pid == 0){
@@ -64,5 +67,7 @@ int main(void){
 				}
 			}
 		}
+	
 	}
+	free(line);
 }
