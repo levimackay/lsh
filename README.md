@@ -1,5 +1,5 @@
 # LSH 
-In order to understand how basic systems work, I decided to program my own shell terminal in C. 
+In order to understand how basic systems work, I decided to program my own shell in C. 
 
 ## Example
 ![lsh running in a terminal](docs/demo.png)
