@@ -25,6 +25,11 @@ int main(void){
 				word = strtok(NULL, " \t\n");
 			}
 			args[count] = NULL;
+			
+			if (word != NULL){
+				printf("lsh: too many arguments\n");
+				continue;
+			}
 
 			if (count > 0 && strcmp(args[0], "cd") == 0){
 				char *dir;
