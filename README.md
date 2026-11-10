@@ -46,3 +46,6 @@ Lastly, for memory management, I free the buffer created by `getline()` when the
 - Real Parser
 - Ctrl C only stops the program not the whole shell
 - --trace mode that shows fork, exec, and wait live
+
+## Credit
+The base loop (read a line, split it, fork and exec) follows Stephen Brennan's tutorial, [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/). The cd and help built-ins, getline, the word cap and everything on the roadmap are my own additions.
