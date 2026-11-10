@@ -48,4 +48,4 @@ Lastly, for memory management, I free the buffer created by `getline()` when the
 - --trace mode that shows fork, exec, and wait live
 
 ## Credit
-The base loop (read a line, split it, fork and exec) follows Stephen Brennan's tutorial, [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/). The cd and help built-ins, getline, the word cap and everything on the roadmap are my own additions.
+The base loop (read a line, split it, fork and exec) and the exit, cd and help built-ins follow Stephen Brennan's tutorial, [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/). Reading lines of any length with getline, sending plain cd and cd ~ home, the 63-word cap and the AddressSanitizer testing are my own additions.
